@@ -2,6 +2,8 @@ import sys
 import re
 import os
 import glob
+import urllib
+
 import eyed3
 import spotipy
 
@@ -68,6 +70,12 @@ def tag_song(path, info):
     audiofile.tag.album = info["album"]["name"]
     audiofile.tag.title = info["name"]
 
+    if "images" in info["album"] and len(info["album"]["images"]) > 0:
+        img_url = info["album"]["images"][0]["url"]
+        response = urllib.request.urlopen(img_url)
+        imagedata = response.read()
+        audiofile.tag.images.set(3, imagedata, "image/jpeg")
+
     audiofile.tag.save()
 
 
@@ -107,6 +115,8 @@ def is_tagged(path):
         and len(audiofile.tag.album) > 0
         and audiofile.tag.title
         and len(audiofile.tag.title) > 0
+        and audiofile.tag.images
+        and len(audiofile.tag.images) > 0
     ):
         return True
     return False
