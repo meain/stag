@@ -20,14 +20,14 @@ install_requires = ["eyed3", "spotipy"]
 
 setuptools.setup(
     name="pystag",
-    version="0.0.3",
+    version="0.0.4",
     author="Abin Simon",
     author_email="abinsimon10@gmail.com",
     description="Tag local music using spotify api",
     url="https://github.com/meain/stag",
     long_description=long_description,
-    packages=setuptools.find_packages(),
+    packages=["stag"],
     keywords=["spotify", "music", "tagging"],
     classifiers=cur_classifiers,
-    entry_points={"console_scripts": ["stag = stag:main"]},
+    entry_points={"console_scripts": ["stag = stag.stag:main"]},
 )
