@@ -6,7 +6,7 @@ Tag your local music using spotify api.
 
 ![gif](https://i.imgur.com/5uYTIyJ.gif)
 
-> Adds proper `title`, `album` and `artist` and renames file to `title`.
+> Adds proper `title`, `album`, `artist` and `album art` and renames file to `title`.
 
 
 ## Installation
