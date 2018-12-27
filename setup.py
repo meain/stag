@@ -20,7 +20,7 @@ install_requires = ["eyed3", "spotipy"]
 
 setuptools.setup(
     name="pystag",
-    version="0.0.2",
+    version="0.0.3",
     author="Abin Simon",
     author_email="abinsimon10@gmail.com",
     description="Tag local music using spotify api",

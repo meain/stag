@@ -8,10 +8,12 @@ Tag your local music using spotify api.
 
 > Adds proper `title`, `album` and `artist` and renames file to `title`.
 
-## Requirements
 
-- `eyed3` ( tag songs )
-- `spotipy` ( spotify api client )
+## Installation
+
+```
+pip3 install pystag
+```
 
 ## Usage
 
@@ -21,4 +23,10 @@ You need to set 3 environment variables for `stag`
 - `SPOTIFY_CLIENT_SECRET`
 - `SPOTIFY_USERNAME`
 
-Once this is set you can just run: `python3 stag.py`
+Once this is set you can just run `stag` in the folder with the songs.
+
+
+## Requirements
+
+- `eyed3` ( tag songs )
+- `spotipy` ( spotify api client )
