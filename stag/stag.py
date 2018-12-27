@@ -108,10 +108,14 @@ def main():
 
     sys.stdout.write(ERASE_LINE)
     sys.stdout.write(CURSOR_UP_ONE)
-    print(f"Could not fetch info for the following {len(failed)} song(s).")
-    print("Try renaming them to simpler names.")
-    for song in failed:
-        print(song)
+    sys.stdout.write(ERASE_LINE)
+    if len(failed) > 0:
+        print(f"Could not fetch info for the following {len(failed)} song(s).")
+        print("Try renaming them to simpler names.")
+        for song in failed:
+            print(song)
+    else:
+        print('Tagging complete')
 
 
 if __name__ == "__main__":
