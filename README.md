@@ -25,6 +25,9 @@ You need to set 3 environment variables for `stag`
 
 Once this is set you can just run `stag` in the folder with the songs.
 
+Go [here](https://developer.spotify.com/documentation/general/guides/app-settings/#register-your-app) to know how to
+generate a `CLIENT_ID` and `CLIENT_SECRET`. To get the `USERNAME` just check the profile share link in your profile.
+Your profile share link will look something like `https://open.spotify.com/user/<USERNAME>?si=<SOMETHING_ELSE>`
 
 ## Requirements
 
