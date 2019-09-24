@@ -24,6 +24,7 @@ creds = {
 class colors:
     GREEN = "\033[92m"
     RED = "\033[91m"
+    BLUE = "\033[94m"
     ENDC = "\033[0m"
 
 
@@ -89,14 +90,17 @@ def rename_file(path, info):
         print("Could not rename", from_path)
 
 
-def print_item(number, name, success=True, c_song=""):
+def print_item(number, name, success=None, c_song=""):
     try:
         columns = int(os.popen("stty size", "r").read().split()[1])
     except Exception:
         columns = 100
     bar_len = min(150, columns - 10)
     name = name[:bar_len]
-    if success:
+    if success is None:
+        sys.stdout.write(ERASE_LINE)
+        sys.stdout.write("%s: %s%s%s\r\n" % (number, colors.BLUE, name, colors.ENDC))
+    elif success:
         sys.stdout.write(ERASE_LINE)
         sys.stdout.write("%s: %s%s%s\r\n" % (number, colors.GREEN, name, colors.ENDC))
     else:
@@ -108,6 +112,8 @@ def print_item(number, name, success=True, c_song=""):
 
 def is_tagged(path):
     audiofile = eyed3.load(path)
+    if not audiofile or audiofile.tag:
+        return False
     if (
         audiofile.tag.artist
         and len(audiofile.tag.artist) > 0
@@ -127,17 +133,24 @@ def main():
     print(f"Tagging {len(files)} songs")
     failed = []
     for i, f in enumerate(files):
-        song = get_name(f)
-        if is_tagged(f):
-            print_item(i + 1, song)
-            continue
-        c_song = get_clean_name(get_name(f))
-        info = get_song(c_song)
-        if info:
-            print_item(i + 1, song)
-            tag_song(f, info)
-            rename_file(f, info)
-        else:
+        try:
+            song = get_name(f)
+            try:
+                if is_tagged(f):
+                    print_item(i + 1, song)
+                    continue
+            except Exception:
+                pass
+            c_song = get_clean_name(get_name(f))
+            info = get_song(c_song)
+            if info:
+                print_item(i + 1, song)
+                tag_song(f, info)
+                rename_file(f, info)
+            else:
+                failed.append(song)
+                print_item(i + 1, song, False, c_song)
+        except Exception:
             failed.append(song)
             print_item(i + 1, song, False, c_song)
 
